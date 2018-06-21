@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Music Buddy</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+	<table>
+		<tr class = "header">
+			<td>Album   </td>
+			<td> --- </td>
+			<td>Artist</td>
+		</tr>
+		<tr th:each="list : ${Results}">
+			<td th:text="${list.Title}">Title</td>
+			<td>  - </td>
+			<td th:text="${list.Name}">Name</td>
+		</tr>
+	</table>
+</body>
+</html>
+

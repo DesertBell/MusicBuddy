@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Music Buddy</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+	<form action="#" th:action="@{/view}" th:object="${Results}" method="post">
+		<h2>Click to retrieve Artist and Album names</h2>
+		<p><input type="submit" value="Submit" /></p>
+	</form>
+</body>
+</html>
