@@ -11,10 +11,10 @@
 			<td> --- </td>
 			<td>Artist</td>
 		</tr>
-		<tr th:each="list : ${Results}">
-			<td th:text="${list.Title}">Title</td>
+		<tr th:each="item : ${model.list}">
+			<td th:text="${item.Title}">Title</td>
 			<td>  - </td>
-			<td th:text="${list.Name}">Name</td>
+			<td th:text="${item.Name}">Name</td>
 		</tr>
 	</table>
 </body>

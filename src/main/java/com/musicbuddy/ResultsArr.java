@@ -6,49 +6,44 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
+import java.util.List;
 
 public class ResultsArr {
 
-	public static void getAllAlbums() {
-    		// connection to the database
-            Connection con;
+	public static List<Results> getAllAlbums() {
+		// connection to the database
+		Connection con;
 
-                try {
-					con = DriverManager.getConnection("jdbc:sqlite:./chinook.db", "", "");
-				
-					// prepare a Statement object for SQL queries
-					Statement stmt = con.createStatement(); 
+		try {
+			con = DriverManager.getConnection("jdbc:sqlite:./chinook.db", "", "");
 
-					// get all columns from the table "Album"
-					ResultSet rs = stmt.executeQuery("SELECT Title, Name FROM Albums JOIN Artists USING (ArtistId) LIMIT 100");
+			// prepare a Statement object for SQL queries
+			Statement stmt = con.createStatement();
 
-                	//ArrayList
-					ArrayList<Results>list = new ArrayList<Results>();
-					// variables for each column in the database
-					String Title;
-					String Name;
-
-                // access each row in the table
-					while (rs.next()) {
-						for (int i = 0; i < list.size(); i++) {
-						
-							Title = rs.getString("Title");
-							Name = rs.getString("Name");
-						
-						
-						System.out.println(Title); 
-						System.out.println(Name);
-
-						
-                }
-						return;
-					}
+			// get all columns from the table "Album"
+			ResultSet rs = stmt.executeQuery("SELECT Title, Name FROM Albums JOIN Artists USING (ArtistId) LIMIT 100");
+			// ArrayList
+			ArrayList<Results> list = new ArrayList<Results>();
 					
-                } catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	}       
-	
-    }
+			
+			// access each row in the table
+			while (rs.next()) {
+				Results newResult = new Results();
+				newResult.setName(rs.getString("Name"));
+				newResult.setTitle(rs.getString("Title"));
+				list.add(newResult);
+			}
+			
+			return list;
+
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			return null;
+		}
+		
+	}
+
+}

@@ -17,7 +17,7 @@ import com.musicbuddy.ResultsContainer;
 @RequestMapping({"/","/albums"})
 public class ResultsController {
 
-	private static List<Results> list = new ArrayList<Results>();
+	private List<Results> list = new ArrayList<Results>();
 
 		
 	@RequestMapping(value = "/albums", method = RequestMethod.GET)
@@ -29,20 +29,12 @@ public class ResultsController {
 		return new ModelAndView("albums" , "resultsContainer", resultsContainer);
 	}
 	
-	@SuppressWarnings("static-access")
-	@RequestMapping(value = "/view", method = RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute("resultsContainer") ResultsContainer resultsContainer) {
-		System.out.println(resultsContainer);
-		System.out.println(resultsContainer.getList());
-		List<Results> list = resultsContainer.getList();
+	//@SuppressWarnings("static-access")
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	public ModelAndView view() {
+		ResultsContainer vm = new ResultsContainer();
+		vm.setList(new ResultsArr().getAllAlbums());
 		
-		if(null != list && list.size() > 0) {
-			ResultsController.list = list;
-			for (Results lists : list) {
-				System.out.printf("%s \t %s \n", lists.getName(), lists.getTitle());
-			}
-		}
-		
-		return new ModelAndView("view", "resultsContainer", resultsContainer);
+		return new ModelAndView("view", "model", vm);
 	}
 }
